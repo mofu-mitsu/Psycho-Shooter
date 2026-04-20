@@ -60,3 +60,133 @@ button:disabled { background: #333; border-color: #555; color: #888; cursor: not
 /* ミニゲーム中の演出 */
 .breakthrough-flash { animation: flash 0.5s infinite alternate; }
 @keyframes flash { from { box-shadow: inset 0 0 20px #fff; } to { box-shadow: inset 0 0 100px #fff; } }
+
+/* 🌟 ステージ選択画面をスクロール可能に修正！ */
+#stage-select-screen {
+    justify-content: flex-start; /* 上から並べる */
+    overflow-y: auto;            /* 縦スクロールを許可 */
+    padding-top: 40px;           /* 上に少し余白 */
+    padding-bottom: 40px;
+}
+
+/* スクロールバーのデザイン（Webkit系） */
+#stage-select-screen::-webkit-scrollbar {
+    width: 8px;
+}
+#stage-select-screen::-webkit-scrollbar-thumb {
+    background: #555599;
+    border-radius: 4px;
+}
+/* 🌟 強制的に非表示にするための重要ルール */
+.hidden {
+    display: none !important;
+}
+
+/* 各スクリーンが全画面を覆うように設定 */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 5, 15, 0.95); /* 背景を濃くして後ろを遮断 */
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100; /* ゲームUI(z-index:10)より上にする */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* ゲームUI（HPバーやセリフ枠）の配置 */
+#game-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 下のボタンが押せるように */
+    z-index: 50;
+}
+
+#top-bar, #dialogue-area, #skill-container {
+    pointer-events: auto; /* UIのボタンだけは触れるように */
+}
+
+/* 🌟 退出ボタンを小さく */
+#quit-btn {
+    padding: 4px 10px;
+    font-size: 11px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    margin-left: 10px;
+    color: #ccc;
+}
+#quit-btn:hover { background: rgba(200, 0, 0, 0.5); color: #fff; }
+
+/* クラスバッジ等の微調整 */
+.class-badge { background: #448; padding: 2px 6px; border-radius: 4px; font-size: 10px; vertical-align: middle; }
+/* 🌟 ホームへ戻るリンクボタン */
+.home-link-area {
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    width: 80%;
+}
+
+.home-link-btn {
+    text-decoration: none;
+    color: #8888aa;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.home-link-btn:hover {
+    color: #ccffff;
+    text-shadow: 0 0 10px #66ccff;
+    transform: translateY(-2px);
+}
+
+.home-link-btn i {
+    margin-right: 5px;
+}
+/* 🌟 スマホ（レスポンシブ）対応 */
+@media (max-width: 600px) {
+    #game-container {
+        width: 100vw;
+        height: 100vh;
+        border: none;
+        border-radius: 0;
+    }
+    
+    h1 { font-size: 28px; }
+    h2 { font-size: 20px; }
+    
+    /* ステージ選択を1列にしてタップしやすく */
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+    
+    /* プロフ画面のカードを縦並びに */
+    .prof-container {
+        flex-direction: column;
+    }
+    
+    /* ゲームUIの文字サイズを調整 */
+    .balloon {
+        font-size: 12px;
+        padding: 8px;
+    }
+    .chara-box img {
+        width: 40px;
+        height: 40px;
+    }
+}
