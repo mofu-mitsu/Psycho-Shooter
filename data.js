@@ -482,7 +482,7 @@ const GAME_DATA = {
                 img: "karume.png" 
             },
             support: { 
-                name: "ほたる", fullName: "ほたるちゃん", gender: "女性", class: "M3-1",
+                name: "ほたる", fullName: "櫂作 蛍（かいさく ほたる）", gender: "女性", class: "M3-1",
                 profile: "人懐っこく悪戯好き。イマジナリーフレンドの『いたる（ぬいぐるみ）』と腹話術で話す。",
                 img: "hotaru.png", words: ["〜ばい！", "いたるが言うとる", "楽しかね〜", "にゃ〜ん"], color: "#ffff99", skillType: "bomb" 
             },
@@ -517,12 +517,12 @@ const GAME_DATA = {
         {
             id: "stage13", title: "世話焼きとお節介な射撃",
             main: { 
-                name: "もみじ", fullName: "もみじ", gender: "男性", class: "M3-1", 
+                name: "もみじ", fullName: "狛林 紅葉（こまばやし もみじ）", gender: "男性", class: "M3-1", 
                 profile: "基本楽観的だが毒舌で喧嘩っ早いマイルドヤンキー。射撃部所属。",
                 img: "momiji.png" 
             },
             support: { 
-                name: "うさぎ", fullName: "うさぎ", gender: "女性", class: "M3-1",
+                name: "うさぎ", fullName: "羽我 兎（はが うさぎ）", gender: "女性", class: "M3-1",
                 profile: "世話焼きでおせっかい。自信家。身長の低さに悩んでおり子供扱いされるのが嫌い。",
                 img: "usagi.png", words: ["子供扱いしないでよね！", "あんた、大丈夫？", "手伝うよ！", "お菓子食べる？"], color: "#ffcccc", skillType: "heal" 
             },
@@ -559,12 +559,12 @@ const GAME_DATA = {
         {
             id: "stage14", title: "狛犬ツインズの迷走",
             main: { 
-                name: "ことは", fullName: "ことは", gender: "女性", class: "M3-1", 
+                name: "ことは", fullName: "少林 思葉（わかばやし ことは）", gender: "女性", class: "M3-1", 
                 profile: "双子の姉。明るいが周りに流されない。無自覚な天然トラブルメーカーで忘れっぽい。",
                 img: "kotoha.png" 
             },
             support: { 
-                name: "いろは", fullName: "いろは", gender: "女性", class: "M3-2",
+                name: "いろは", fullName: "少林 色葉（わかばやし いろは）", gender: "女性", class: "M3-2",
                 profile: "双子の妹。まともで礼儀正しい苦労人。常にアホな姉の後始末をしており心配性が絶えない。",
                 img: "iroha.png", words: ["お姉ちゃん！", "またトラブル！？", "私がやらなきゃ", "しっかりして！"], color: "#ffcc66", skillType: "clear" 
             },
@@ -599,12 +599,12 @@ const GAME_DATA = {
         {
             id: "stage10", title: "外道アイドルの虚像",
             main: { 
-                name: "あかね", fullName: "あかね", gender: "女性", class: "M3-1", 
+                name: "あかね", fullName: "蟻乃 茜音（ありの あかね）", gender: "女性", class: "M3-1", 
                 profile: "クマモチーフ。清廉なアイドルを演じているが、中身は冷徹な外道。お金を信じており、生きることに必死だった過去を持つ。",
                 img: "akane.png" 
             },
             support: { 
-                name: "まりさ", fullName: "まりさ", gender: "女性", class: "M3-2",
+                name: "まりさ", fullName: "氷海 真里冷（ひょうかい まりさ）", gender: "女性", class: "M3-2",
                 profile: "海王星の姫。上品だが奔放。無邪気な自由人。触れるものを凍らせる能力を持つ。海王星出身。",
                 img: "marisa.png", words: ["キラキラ〜☆", "凍っちゃえ！", "海王星の光！", "自由よ！"], color: "#ccccff", skillType: "freeze" 
             },
@@ -637,12 +637,12 @@ const GAME_DATA = {
         {
             id: "stage15", title: "平凡破壊の天才エビ",
             main: { 
-                name: "もとあき", fullName: "もとあき", gender: "男性", class: "M3-1", 
+                name: "もとあき", fullName: "坂藤 基秋（ばんどう もとあき）", gender: "男性", class: "M3-1", 
                 profile: "ドSな天真爛漫天才児。平凡な日常を嫌い、面白いことを常に探している。",
                 img: "motoaki.png" 
             },
             support: { 
-                name: "つとむ", fullName: "つとむ", gender: "男性", class: "M3-1",
+                name: "つとむ", fullName: "清多 努（せた つとむ）", gender: "男性", class: "M3-1",
                 profile: "自信満々で無責任。楽しければ無問題。イケメンだが奇抜な格好の『残念なイケメン』。",
                 img: "tsutomu.png", words: ["ええやん！", "面白そうやん！", "ズレてないけん！", "エビやぞ！"], color: "#ff6666", skillType: "bomb" 
             },
@@ -679,12 +679,12 @@ const GAME_DATA = {
         {
             id: "stage16", title: "軽薄ヒヨコと短気カモシカ",
             main: { 
-                name: "あらた", fullName: "あらた", gender: "男性", class: "M3-1", 
+                name: "あらた", fullName: "橋方 新（はしかた あらた）", gender: "男性", class: "M3-1", 
                 profile: "明るくて軽薄。服の仕立てが得意な目立ちたがり屋。都合が悪くなるとはぐらかす。",
                 img: "arata.png" 
             },
             support: { 
-                name: "はた", fullName: "はたくん", gender: "男性", class: "M3-2",
+                name: "はた", fullName: "末正 将（すえまさ はた）", gender: "男性", class: "M3-2",
                 profile: "短気な目立ちたがり屋の陸上部員。『オレが世界を変えてやる』系の俺様タイプ。",
                 img: "hata.png", words: ["遅ぇぞ！", "オレについてこい！", "オレが目標だ！", "邪魔だ！"], color: "#ff3300", skillType: "laser" 
             },
