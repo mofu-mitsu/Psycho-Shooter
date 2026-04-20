@@ -3,14 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>心理シューティング - とりの丘学園</title>
+    
+    <!-- 🌟 SEO用タイトル & 説明文 -->
+    <title>心理シューティング：とりの丘学園 〜感情の影を撃ち抜く共感アクション〜</title>
+    <meta name="description" content="とりの丘学園の個性豊かなキャラクターと共に、劣等感や承認欲求といった『心の影』を言葉の弾丸で浄化する、新感覚の心理学シューティングゲーム。MBTIやソシオニクスの深層心理を体感せよ！">
+    <meta name="keywords" content="心理学ゲーム, シューティング, とりの丘学園, MBTI, ソシオニクス, フリーゲーム, ブラウザゲーム">
+    
+    <!-- 🌟 OGP設定 (SNS共有時の見栄え) -->
+    <meta property="og:title" content="心理シューティング：とりの丘学園">
+    <meta property="og:description" content="君の言葉が誰かの心を救う。とりの丘学園のメンバーと心の闇を昇華するシューティングゲーム！">
+    <meta property="og:image" content="ogp.png"> <!-- 🌟 ogp.pngを用意してね -->
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- 🌟 Favicon -->
+    <link rel="icon" href="favicon.ico"> <!-- 🌟 favicon.icoを用意してね -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="game-container">
         
-        <!-- 🌟 タイトル画面（ルール説明復活！） -->
+        <!-- タイトル画面 -->
         <div id="title-screen" class="screen active">
             <h1><i class="fa-solid fa-brain"></i> Psycho Shooter</h1>
             <div class="input-group">
@@ -18,96 +33,88 @@
                 <input type="text" id="player-name-input" placeholder="プレイヤー名" maxlength="10">
             </div>
             <button id="start-btn"><i class="fa-solid fa-play"></i> スタート</button>
-            
             <div class="rules-box">
-                <h3>🎮 遊び方</h3>
-                <p>・<b>PC</b>：マウスを動かして移動</p>
-                <p>・<b>スマホ</b>：スワイプで移動</p>
-                <p>・弾(言葉)は<b>オート連射</b>！</p>
-                <p>・ゲージが溜まったら<b>スキル</b>発動！</p>
+                <h3><i class="fa-solid fa-circle-info"></i> 遊び方の心得</h3>
+                <p>・<b>弾は「言葉」</b>：ネガティブな感情を打ち消して！</p>
+                <p>・<b>スキル</b>：青いゲージ満タンで発動！(🥊回復/凍結など)</p>
+                <p>・<b>ミニゲーム</b>：論破や精神統一を乗り越えろ！</p>
+                <p>・<b>難易度</b>：スコアが増えるほど敵が加速するゾ！</p>
+            </div>
+            <div class="home-link-area">
+                <a href="https://mofu-mitsu.github.io/" class="home-link-btn">
+                    <i class="fa-solid fa-house"></i> ホームへ戻る
+                </a>
             </div>
         </div>
 
+        <!-- ステージ選択 -->
         <div id="stage-select-screen" class="screen">
             <h2>向き合う感情を選んでね</h2>
             <div id="stage-buttons" class="grid-container"></div>
         </div>
 
-        <!-- 🌟 プロフ画面（メインとサポートを並べる！） -->
+        <!-- プロフ画面 -->
         <div id="profile-screen" class="screen" style="justify-content: flex-start; overflow-y: auto;">
             <h2 id="prof-stage-title" style="margin-top: 20px;"></h2>
-            
             <div class="prof-container">
-                <!-- メインキャラ -->
                 <div class="prof-card">
-                    <div class="prof-role">【メイン（敵対）】 <span id="prof-main-class" class="class-badge"></span></div>
+                    <div class="prof-role">【メイン】 <span id="prof-main-class" class="class-badge"></span></div>
                     <div class="prof-card-inner">
                         <img id="prof-main-img" src="" alt="Main">
-                        <div class="prof-info">
-                            <h3 id="prof-main-fullname"></h3>
-                            <p><b>性別:</b> <span id="prof-main-gender"></span></p>
-                            <p id="prof-main-desc"></p>
-                        </div>
+                        <div class="prof-info"><h3 id="prof-main-fullname"></h3><p id="prof-main-desc"></p></div>
                     </div>
                 </div>
-
-                <!-- サポートキャラ -->
                 <div class="prof-card">
-                    <div class="prof-role">【サポート（共闘）】 <span id="prof-supp-class" class="class-badge"></span></div>
+                    <div class="prof-role">【サポート】 <span id="prof-supp-class" class="class-badge"></span></div>
                     <div class="prof-card-inner">
                         <img id="prof-supp-img" src="" alt="Support">
-                        <div class="prof-info">
-                            <h3 id="prof-supp-fullname"></h3>
-                            <p><b>性別:</b> <span id="prof-supp-gender"></span></p>
-                            <p id="prof-supp-desc"></p>
-                        </div>
+                        <div class="prof-info"><h3 id="prof-supp-fullname"></h3><p id="prof-supp-desc"></p></div>
                     </div>
                 </div>
             </div>
-
-            <div style="margin: 20px 0; display:flex; gap:10px;">
+            <div class="mode-select-area">
                 <button id="back-to-select-from-prof-btn"><i class="fa-solid fa-rotate-left"></i> 戻る</button>
-                <button id="start-battle-btn"><i class="fa-solid fa-crosshairs"></i> 感情と向き合う</button>
+                <button id="start-battle-btn"><i class="fa-solid fa-crosshairs"></i> ストーリー</button>
+                <button id="start-endless-btn" style="background:#cc0066;"><i class="fa-solid fa-infinity"></i> エンドレス</button>
+                <button id="start-hard-btn" style="background:#000; color:#f00; border-color:#f00;"><i class="fa-solid fa-skull"></i> ハード</button>
             </div>
         </div>
 
+        <!-- ゲームUI -->
         <div id="game-ui" class="hidden">
             <div id="top-bar">
                 <div class="gauge-container">
                     <i class="fa-solid fa-heart" style="color:#ff4444;"></i>
                     <div class="gauge-bg"><div id="hp-bar" class="gauge-fill hp-fill"></div></div>
                 </div>
-                <div class="score-box"><i class="fa-solid fa-star" style="color:#ffff44;"></i> <span id="score-display">0</span>/1000</div>
+                <div class="score-box">
+                    <i class="fa-solid fa-star" style="color:#ffff44;"></i> 
+                    <span id="score-display">0</span><span id="score-max">/1000</span>
+                </div>
+                <button id="quit-btn"><i class="fa-solid fa-door-open"></i> 退出</button>
             </div>
-            
             <div id="skill-container">
                 <button id="skill-btn" disabled><i class="fa-solid fa-bolt"></i> スキル</button>
                 <div class="gauge-bg skill-bg"><div id="skill-bar" class="gauge-fill skill-fill"></div></div>
             </div>
-
             <div id="dialogue-area">
-                <div class="chara-box">
-                    <img id="main-chara-img" src="" alt="Main">
-                    <div id="main-name" class="chara-name">メイン</div>
-                </div>
-                <div id="dialogue-balloon" class="balloon">
-                    <span id="speaker-name"></span>「<span id="dialogue-text"></span>」
-                </div>
-                <div class="chara-box">
-                    <img id="support-chara-img" src="" alt="Support">
-                    <div id="support-name" class="chara-name">サポート</div>
-                </div>
+                <div class="chara-box"><img id="main-chara-img" src=""><div id="main-name" class="chara-name"></div></div>
+                <div id="dialogue-balloon" class="balloon"><span id="speaker-name"></span>「<span id="dialogue-text"></span>」</div>
+                <div class="chara-box"><img id="support-chara-img" src=""><div id="support-name" class="chara-name"></div></div>
             </div>
         </div>
 
+        <!-- リザルト画面 -->
         <div id="result-screen" class="screen">
             <h2 id="result-title"></h2>
             <div class="result-dialogue">
                 <span id="result-speaker"></span>「<span id="result-text"></span>」
             </div>
-            <div style="display: flex; gap: 10px;">
-                <button id="back-to-select-btn"><i class="fa-solid fa-rotate-left"></i> ステージ選択</button>
-                <button id="back-to-title-btn"><i class="fa-solid fa-home"></i> タイトルへ</button>
+            <h3 style="color: gold;">最終スコア: <span id="final-score">0</span> 点</h3>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                <button id="share-btn" style="background:#1DA1F2;"><i class="fa-brands fa-twitter"></i> シェア</button>
+                <button id="back-to-select-btn"><i class="fa-solid fa-map"></i> ステージ選択</button>
+                <button id="back-to-title-btn"><i class="fa-solid fa-home"></i> 終了</button>
             </div>
         </div>
 
