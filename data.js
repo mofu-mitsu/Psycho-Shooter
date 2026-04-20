@@ -4,12 +4,12 @@ const GAME_DATA = {
             id: "stage1",
             title: "劣等感の観測",
             main: { 
-                name: "のぶ", fullName: "のぶ", gender: "男性", class: "M3-2", 
+                name: "のぶ", fullName: "新田 誠（にいだ のぶ）", gender: "男性", class: "M3-2", 
                 profile: "文画部所属。勝ち気な絵描き。絵に関しては負けず嫌いだが、上には上がいるため自分の絵を認められない。評価されたいのではなく『あるべき自分』を回収するために筆を動かし続ける。",
                 img: "nobu.png" 
             },
             support: { 
-                name: "きよみ", fullName: "きよみ", gender: "女性", class: "M3-2",
+                name: "きよみ", fullName: "日矢川 清美（ひやかわ きよみ）", gender: "女性", class: "M3-2",
                 profile: "てるてる坊主モチーフ。思考型・観測崩壊ヤンデレ。理解するまで観測をやめない。相手の反応をデータとして楽しむ癖がある。のぶを観測中。",
                 img: "kiyomi.png", words: ["観測中", "良い反応だね", "ふふっ", "データ通り", "筆が乱れたね"], color: "#ccffff", skillType: "clear" 
             },
@@ -64,13 +64,13 @@ const GAME_DATA = {
             id: "stage2",
             title: "承認欲求の地雷原",
             main: { 
-                name: "みりんてゃ", fullName: "みりんてゃ", gender: "女性",  class: "H2-2",
+                name: "みりんてゃ", fullName: "萩枝 美琳（はぎえだ みりん）", gender: "女性",  class: "H2-2",
                 profile: "黒猫モチーフの地雷系女子。可愛いものが大好きで、常に誰かからの『いいね』や『承認』を求めている。見られていないと自分の存在価値を失う恐怖を抱えている。",
                 img: "mirin.png" 
             },
             support: { 
-                name: "ももか", fullName: "ももか", gender: "女性", class: "H1-1",
-                profile: "元愛犬。ENTJ。負けず嫌いのツンデレ。セレブポーズを決め、誇り高く吠える。パパ（みつきのパパ）が大好き。",
+                name: "ももか", fullName: "遠藤 桃花（えんどう ももか）", gender: "女性", class: "H1-1",
+                profile: "元愛犬。負けず嫌いのツンデレ。セレブポーズを決め、誇り高く吠える。パパ（みつきのパパ）が大好き。",
                 img: "momoka.png", words: ["ワン！", "セレブポーズ！", "あたしを見なさい！", "グルル…", "パパ〜！"], color: "#ffcc66", skillType: "clear" 
             },
             playerWords: ["ここにいるよ", "そのままでいい", "可愛いよ", "見てるよ", "愛してる", "大丈夫だよ", "あたしが認めるよ"],
@@ -117,13 +117,13 @@ const GAME_DATA = {
             id: "stage3",
             title: "汗と油のファンタジー",
             main: { 
-                name: "えいじ", fullName: "えいじ", gender: "男性",  class: "H3-1",
-                profile: "筋肉サイコー！プロテイン大好き。自分の汗が入ったポカリを他人に勧める、暑苦しくも真っ直ぐな男。",
+                name: "えいじ", fullName: "筋永 明日雅（すじなが あすが）", gender: "男性",  class: "H3-1",
+                profile: "筋肉サイコー！あだ名はえいじ。プロテイン大好き。自分の汗が入ったポカリを他人に勧める、暑苦しくも真っ直ぐな男。",
                 img: "eiji.png" 
             },
             support: { 
-                name: "ご褒美", fullName: "ご褒美", gender: "男性", class: "H3-1",
-                profile: "豚モチーフ。風呂上がりの出汁は豚骨仕立て。罵倒されると喜ぶドM。ツインテールのワシャワシャに命をかけるオタク。",
+                name: "ご褒美", fullName: "栄城 縫（えいしろ ぬい）", gender: "男性", class: "H3-1",
+                profile: "豚モチーフ。あだ名はご褒美。風呂上がりの出汁は豚骨仕立て。罵倒されると喜ぶドM。ツインテールのワシャワシャに命をかけるオタク。",
                 img: "gohoubi.png", words: ["ありがトン♡", "ご褒美だゾ", "豚骨仕立て", "ブヒィ！", "ワシャワシャしたいゾ", "たまらんゾ"], color: "#ff99cc", skillType: "heal" 
             },
             playerWords: ["臭い！", "離れろ！", "換気して", "シャワー浴びて", "ポカリいらん！", "近寄るな！", "油っこい！"],
@@ -166,12 +166,12 @@ const GAME_DATA = {
             id: "stage4",
             title: "情緒不安定の迷宮",
             main: { 
-                name: "ゆい", fullName: "ゆい", gender: "女性",  class: "H1-3",
+                name: "ゆい", fullName: "土市 結衣（つちいち ゆい）", gender: "女性",  class: "H1-3",
                 profile: "あざといメンヘラ策士。情緒不安定で、被害者ムーブや自傷脅しを使って他人の感情をコントロールしようとする。依存適性が高い相手を常に探している。",
                 img: "yui.png" 
             },
             support: { 
-                name: "ふみこ", fullName: "ふみこちゃん", gender: "女性", class: "H1-2",
+                name: "ふみこ", fullName: "小玉 史子（こだま ふみこ）", gender: "女性", class: "H1-2",
                 profile: "文鳥モチーフ。穏やかで優しい同い年の女の子。調理部所属。オカリナが吹ける。話すと温もりを感じる慈愛の人。",
                 img: "fumiko.png", words: ["大丈夫だよ", "深呼吸して", "温かいお茶飲む？", "一人じゃないよ", "よしよし", "ここにいるよ"], color: "#ffccff", skillType: "heal" 
             },
@@ -217,12 +217,12 @@ const GAME_DATA = {
             id: "stage5",
             title: "Fe行方不明の要因分解",
             main: { 
-                name: "かじ", fullName: "かじ", gender: "男性",  class: "H1-4",
+                name: "かじ", fullName: "源口 舵（みなぐち かじ）", gender: "男性",  class: "H1-4",
                 profile: "元気先行で唐突に変な行動をとる『ねこたくん』。意志が強く、否定されても突き進む。予測不能なカオスの源。",
                 img: "kaji.png" 
             },
             support: { 
-                name: "りょうご", fullName: "りょうご", gender: "男性", class: "H2-1",
+                name: "りょうご", fullName: "水上 亮吾（みずかみ りょうご）", gender: "男性", class: "H2-1",
                 profile: "理屈っぽい知識人。構造重視。共感しようとしても論理的解析が出てしまう天然理屈屋。Feは常に行方不明だが、本人は真剣。",
                 img: "ryougo.png", words: ["要因分解しよう", "再現性が重要だ", "内部要因かな", "論理的じゃない", "……？", "構造を理解させてくれ"], color: "#99ccff", skillType: "clear" 
             },
@@ -271,13 +271,13 @@ const GAME_DATA = {
         {
             id: "stage6", title: "ツンギレ・ガーデニング",
             main: { 
-                name: "うらら", fullName: "うらら", gender: "女性", class: "H3-2", 
+                name: "うらら", fullName: "並河 麗（なびか うらら）", gender: "女性", class: "H3-2", 
                 profile: "ツンギレESTJ。強気で傲慢。趣味はガーデニングだが、キレるとプランターが飛んでくる。完璧主義の毒舌家。",
                 img: "urara.png" 
             },
             support: { 
-                name: "ご褒美", fullName: "ご褒美", gender: "男性", class: "H3-1",
-                profile: "罵倒されると喜ぶドM豚。うらら様のキレ芸は彼にとってのご褒美。",
+                name: "ご褒美", fullName: "栄城 縫（えいしろ ぬい）", gender: "男性", class: "H3-1",
+                profile: "あだ名はご褒美。罵倒されると喜ぶドM豚。うらら様のキレ芸は彼にとってのご褒美。",
                 img: "gohoubi.png", words: ["ありがトン♡", "もっとキレて！", "たまらんゾ", "ブヒィ！"], color: "#ff99cc", skillType: "shield" 
             },
             playerWords: ["落ち着いて", "花を大事に", "怒鳴らないで", "ご褒美を無視して", "綺麗に咲いてるよ", "ガーデニングしよう"],
@@ -320,12 +320,12 @@ const GAME_DATA = {
         {
             id: "stage7", title: "不完全な旋律",
             main: { 
-                name: "ねおん", fullName: "ねおん", gender: "男性", class: "M3-1", 
+                name: "ねおん", fullName: "男知合 音穏（おちあい ねおん）", gender: "男性", class: "M3-1", 
                 profile: "病弱で内気な少年。あいなの双子の弟。自尊心が低く泣き虫だが、周囲への礼儀は欠かさない。音楽を聴く時間が唯一の救い。",
                 img: "neon.png" 
             },
             support: { 
-                name: "あいな", fullName: "あいな", gender: "女性", class: "M3-1",
+                name: "あいな", fullName: "女良 愛奈（めら あいな）", gender: "女性", class: "M3-1",
                 profile: "ねおんの双子の姉。勝気で負けず嫌い。現在の状態を『不完全』と定義し、完璧な絵を求めてSNSに挑み続ける努力家。",
                 img: "aina.png", words: ["不完全よ！", "もっと上へ！", "甘えないで！", "描き直す！"], color: "#ff99ff", skillType: "laser" 
             },
@@ -357,12 +357,12 @@ const GAME_DATA = {
         {
             id: "stage8", title: "深海ココア",
             main: { 
-                name: "れな", fullName: "れな", gender: "女性", class: "M3-2", 
+                name: "れな", fullName: "冷泉 玲奈（れいぜい れな）", gender: "女性", class: "M3-2", 
                 profile: "イカモチーフ。無愛想で冷淡。内省的で冷たい言葉を吐くが、本当は不器用なだけ。実用主義者。",
                 img: "rena.png" 
             },
             support: { 
-                name: "おん", fullName: "おん", gender: "男性", class: "M3-2",
+                name: "おん", fullName: "温井 温（ぬくい おん）", gender: "男性", class: "M3-2",
                 profile: "タコモチーフ。とても温厚で穏やか。失敗も肯定してくれる優しい性格。寒い夜にココアを持って寄り添うタイプ。",
                 img: "on.png", words: ["ココア飲む？", "大丈夫だよ", "ゆっくりね", "ぽかぽか〜"], color: "#ffccaa", skillType: "heal" 
             },
@@ -394,12 +394,12 @@ const GAME_DATA = {
         {
             id: "stage9", title: "新聞部・閉鎖空間",
             main: { 
-                name: "きゅうた", fullName: "きゅうた", gender: "男性", class: "M3-1", 
+                name: "きゅうた", fullName: "品衛 球太（しなえ きゅうた）", gender: "男性", class: "M3-1", 
                 profile: "犬モチーフ。前髪で世界を遮断している。単なる恥ずかしがり屋ではなく、外部の無秩序な情報を入れると永遠に思考ループに陥るのを防ぐための防衛手段。",
                 img: "kyuta.png" 
             },
             support: { 
-                name: "まひる", fullName: "まひる", gender: "男性", class: "M3-1",
+                name: "まひる", fullName: "小日向 真昼（こひなた まひる）", gender: "男性", class: "M3-1",
                 profile: "怠惰代表。昼寝好きで無気力。思考過多による行動停止を起こした諦念型。",
                 img: "mahiru.png", words: ["だるいだら…", "意味ないに", "寝かせて…", "無駄じゃんね"], color: "#ffffcc", skillType: "slow" 
             },
@@ -431,57 +431,17 @@ const GAME_DATA = {
                 lose: [{ speaker: "きゅうた", text: "思考の終わらない……情報の海に、沈む……" }, { speaker: "まひる", text: "あーあ……諦めるの早すぎだら……" }]
             }
         },
-        {
-            id: "stage11", title: "流行と笑顔の境界線",
-            main: { 
-                name: "きね", fullName: "きねくん", gender: "男性", class: "M3-1", 
-                profile: "クールで流行に乗り切れないし、乗る気もない。実用性重視のマイペースな男の子。",
-                img: "kine.png" 
-            },
-            support: { 
-                name: "しゅうへい", fullName: "しゅうへいくん", gender: "男性", class: "M3-1",
-                profile: "他人に影響されやすく、置いていかれるのが苦手。いつも無理して笑顔を作っている。",
-                img: "shuhei.png", words: ["みんな一緒だよ！", "笑顔、笑顔！", "置いてかないで！", "楽しいね！"], color: "#ffaa66", skillType: "heal" 
-            },
-            playerWords: ["無理に笑わなくていい", "自分のペースで", "流行なんて関係ない", "そのままの君でいい"],
-            enemyColor: "#dddddd",
-            enemyWords: ["流行遅れ", "置いていかれる", "同調圧力", "笑顔を作れ", "みんなと同じに", "一人ぼっち"],
-            pattern: "rush",
-            dialogues: {
-                start: [
-                    { speaker: "きね", text: "流行とか、みんなで群れるのとか、俺には必要ない。" },
-                    { speaker: "しゅうへい", text: "えっ、でもきねくん！みんなと同じじゃないと不安だよ！笑顔作ろう！" },
-                    { speaker: "きね", text: "その笑顔、引きつってるぞ。無理する意味がわからん。" }
-                ],
-                mid: [
-                    { speaker: "しゅうへい", text: "置いていかれるのが怖いんだ……だから、いつも笑ってなきゃ！" },
-                    { speaker: "きね", text: "誰の基準で生きてるんだよ。他人に合わせて自分をすり減らすのは非実用的だ。" },
-                    { speaker: "しゅうへい", text: "きねくんは一人でも平気そうでいいなぁ。僕には無理だよ！" },
-                    { speaker: "きね", text: "平気なんじゃなくて、群れるメリットがないだけだ。" },
-                    { speaker: "しゅうへい", text: "うぅ…みんな楽しそうにしてるのに、僕だけ置いていかないで……！" }
-                ],
-                skill: [{ speaker: "しゅうへい", text: "みんなを笑顔にするよ！元気出して！（HP大回復）" }],
-                lowHP: [
-                    { speaker: "しゅうへい", text: "あはは…笑顔…作れなくなっちゃった……どうしよう、見捨てられちゃう……" },
-                    { speaker: "きね", text: "笑うな。嫌なら嫌だって言えばいいだろ。俺が後ろにいてやるから。" },
-                    { speaker: "しゅうへい", text: "でも…一人になるのは嫌なんだよおぉ……！" },
-                    { speaker: "きね", text: "ったく、めんどくさいな。俺はここにいるだろ。ほら、前見ろ。" }
-                ],
-                win: [{ speaker: "きね", text: "…少しは肩の力抜けたか？" }, { speaker: "しゅうへい", text: "うん！きねくん、ありがとう！本当の笑顔になれたかも！" }],
-                lose: [{ speaker: "しゅうへい", text: "みんな、どこ行っちゃったの……？一人にしないで……" }]
-            }
-        },
         // --- 🌟 新ステージ：きね（ISTP）＆ しゅうへい（ESFJ） ---
         {
             id: "stage11", title: "流行と笑顔の境界線",
             main: { 
-                name: "きね", fullName: "きねくん", gender: "男性", class: "M3-1", 
-                profile: "ひよこモチーフ。ISTP。クールで流行に乗り切れないし、乗る気もない。実用性重視のマイペースな男の子。",
+                name: "きね", fullName: "入間 仁（いるま きね）", gender: "男性", class: "M3-1", 
+                profile: "クールで流行に乗り切れないし、乗る気もない。実用性重視のマイペースな男の子。",
                 img: "kine.png" 
             },
             support: { 
-                name: "しゅうへい", fullName: "しゅうへいくん", gender: "男性", class: "M3-1",
-                profile: "ダルマモチーフ。ESFJ。他人に影響されやすく、置いていかれるのが苦手。いつも無理して笑顔を作っている。",
+                name: "しゅうへい", fullName: "巴陵 柊幣（はりょう しゅうへい）", gender: "男性", class: "M3-1",
+                profile: "他人に影響されやすく、置いていかれるのが苦手。いつも無理して笑顔を作っている。",
                 img: "shuhei.png", words: ["みんな一緒だよ！", "笑顔、笑顔！", "置いてかないで！", "楽しいね！"], color: "#ffaa66", skillType: "heal" 
             },
             playerWords: ["無理に笑わなくていい", "自分のペースで", "流行なんて関係ない", "そのままの君でいい"],
@@ -517,7 +477,7 @@ const GAME_DATA = {
         {
             id: "stage12", title: "比喩と虚構のネコポシェット",
             main: { 
-                name: "かるめ", fullName: "かるめくん", gender: "男性", class: "M3-1", 
+                name: "かるめ", fullName: "明嵐 花流愛（めあらし かるめ）", gender: "男性", class: "M3-1", 
                 profile: "PTSG（心的外傷後成長）。冷静でミステリアス。基準逸脱を恐れ、比喩やメタファーを多用する。",
                 img: "karume.png" 
             },
