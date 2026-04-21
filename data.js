@@ -224,7 +224,7 @@ const GAME_DATA = {
             support: { 
                 name: "りょうご", fullName: "水上 亮吾（みずかみ りょうご）", gender: "男性", class: "H2-1",
                 profile: "理屈っぽい知識人。構造重視。共感しようとしても論理的解析が出てしまう天然理屈屋。Feは常に行方不明だが、本人は真剣。",
-                img: "ryougo.png", words: ["要因分解しよう", "再現性が重要だ", "内部要因かな", "論理的じゃない", "……？", "構造を理解させてくれ"], color: "#99ccff", skillType: "clear" 
+                img: "ryogo.png", words: ["要因分解しよう", "再現性が重要だ", "内部要因かな", "論理的じゃない", "……？", "構造を理解させてくれ"], color: "#99ccff", skillType: "clear" 
             },
             playerWords: ["意味わからん", "パン返して", "落ち着け", "要因とかいいから！", "話を聞け！", "構造とかいいから！"],
             enemyColor: "#00cc66",
@@ -897,7 +897,7 @@ const GAME_DATA = {
             main: { 
                 name: "るな", fullName: "槻 琉奈（けやき るな）", gender: "女性", class: "M3-2", 
                 profile: "他人に触れると静電気を発してしまうため、人を傷つけるのを恐れて『気安く触らないで』と強がる弱虫。",
-                img: "runa.png" 
+                img: "luna.png" 
             },
             support: { 
                 name: "みお", fullName: "恵 澪（めぐみ みお）", gender: "女性", class: "M3-1",
