@@ -1,7 +1,10 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
-const IMG_PATH = "images/"; // 🌟 画像フォルダ
-const ASSET_PATH = "assets/"; // 🌟 音源フォルダ（SE/BGM用）
+
+// --- 🌟 設定：画像・音源フォルダ ---
+const IMG_PATH = "images/";
+const ASSET_PATH = "assets/";
+
 // --- 基本変数 ---
 let playerName = "名無し";
 let isPlaying = false;
@@ -17,7 +20,7 @@ let isEventActive = false, isMiniGame = false, isBonusMode = false, isChaosMode 
 let isSlow = false, isShield = false, isFreeze = false, isDarkness = false;
 let isDebateMode = false, isReverse = false;
 
-// --- ミニゲーム用 ---
+// --- ミニゲーム管理 ---
 let debateClicks = 0; const DEBATE_MAX = 15;      
 let nextWarningScore = 300, nextBonusScore = 400, nextMiniGameScore = 500, nextDebateScore = 600, nextChaosScore = 750;
 
@@ -64,8 +67,8 @@ document.getElementById("start-hard-btn").onclick = () => { stopGame(); isEndles
 
 document.getElementById("share-btn").onclick = async () => {
     const mode = isHardMode ? "ハード" : (isEndless ? "エンドレス" : "ストーリー");
-    const text = `とりの丘学園 心理シューティング\n「${currentStage.title}」を${mode}モードで${score}点！\n#とりの丘学園`;
-    if (navigator.share) { await navigator.share({ title: '結果シェア', text: text }); } 
+    const text = `とりの丘学園 心理シューティング\nステージ: ${currentStage.title}\n${mode}モードで ${score}点 達成！\n#とりの丘学園 #PsychoShooter`;
+    if (navigator.share) { await navigator.share({ title: '心理シューティング結果', text: text, url: window.location.href }); } 
     else { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank'); }
 };
 
@@ -85,10 +88,11 @@ function showProfile(stage) {
     document.getElementById("prof-stage-title").innerText = stage.title;
     document.getElementById("prof-main-class").innerText = stage.main.class || "M3";
     document.getElementById("prof-supp-class").innerText = stage.support.class || "M3";
-    document.getElementById("prof-main-img").src = stage.main.img;
+    // 🌟 画像パス適用
+    document.getElementById("prof-main-img").src = IMG_PATH + stage.main.img;
     document.getElementById("prof-main-fullname").innerText = stage.main.fullName;
     document.getElementById("prof-main-desc").innerText = stage.main.profile;
-    document.getElementById("prof-supp-img").src = stage.support.img;
+    document.getElementById("prof-supp-img").src = IMG_PATH + stage.support.img;
     document.getElementById("prof-supp-fullname").innerText = stage.support.fullName;
     document.getElementById("prof-supp-desc").innerText = stage.support.profile;
     showScreen("profile-screen");
@@ -105,6 +109,12 @@ function startGame(stage) {
     const sm = document.getElementById("score-max");
     if(sm) sm.innerText = isEndless ? "" : "/1000";
 
+    // 🌟 画像パス適用
+    document.getElementById("main-chara-img").src = IMG_PATH + stage.main.img;
+    document.getElementById("main-name").innerText = stage.main.name;
+    document.getElementById("support-chara-img").src = IMG_PATH + stage.support.img;
+    document.getElementById("support-name").innerText = stage.support.name;
+
     const container = document.getElementById("game-container");
     if(stage.id === "stage3") container.classList.add("soup-bg"); else container.classList.remove("soup-bg");
 
@@ -112,16 +122,16 @@ function startGame(stage) {
 }
 
 // ----------------------------------------
-// 3. スキル・特殊アクション
+// 3. 特殊アクション (🥊⚡)
 // ----------------------------------------
 
 function firePunch() {
-    // 🥊 サポートキャラの位置から巨大なパンチが飛んでいく！
-    punchEffects.push({ x: supportNPC.x, y: canvas.height + 100, targetY: canvas.height/2, life: 80 });
-    enemies.forEach(e => { if(Math.abs(e.x - supportNPC.x) < 200) { e.hp = 0; score += 5; } });
+    // 🌟 サポートNPCの位置からパンチ！
+    punchEffects.push({ x: supportNPC.x, y: canvas.height + 50, targetY: canvas.height/2, life: 80 });
+    enemies.forEach(e => { if(Math.abs(e.x - supportNPC.x) < 200) { e.hp = 0; score += 10; } });
 }
 function fireLaser() {
-    // ⚡ サポートキャラの位置からレーザー発射！
+    // 🌟 サポートNPCの位置からレーザー！
     lasers.push({ x: supportNPC.x, life: 40 });
 }
 function fireCatBomb() {
@@ -138,7 +148,6 @@ document.getElementById("skill-btn").onclick = () => {
         document.getElementById("speaker-name").innerText = d.speaker;
         document.getElementById("dialogue-text").innerText = d.text;
     }
-
     const type = currentStage.support.skillType;
     if (type === "clear") { enemies = []; score += 100; }
     else if (type === "heal") { hp = Math.min(100, hp + 40); }
@@ -151,9 +160,12 @@ document.getElementById("skill-btn").onclick = () => {
     updateUI();
 };
 
+// --- 操作系 (マウス & ドラッグ) ---
+let isDragging = false;
 window.addEventListener("keydown", (e) => { if (isDebateMode && e.code === "Space") debateClicks++; });
-canvas.addEventListener("touchstart", (e) => { if (isDebateMode) { debateClicks++; e.preventDefault(); } }, { passive: false });
 
+canvas.addEventListener("mousedown", () => isDragging = true);
+canvas.addEventListener("mouseup", () => isDragging = false);
 canvas.addEventListener("mousemove", (e) => {
     if (!isPlaying || isDebateMode) return;
     const rect = canvas.getBoundingClientRect();
@@ -163,8 +175,25 @@ canvas.addEventListener("mousemove", (e) => {
     else { player.x = tx; player.y = ty; }
 });
 
+// スマホドラッグ
+canvas.addEventListener("touchstart", (e) => {
+    if (isDebateMode) { debateClicks++; e.preventDefault(); }
+    else { isDragging = true; }
+}, { passive: false });
+canvas.addEventListener("touchend", () => isDragging = false);
+canvas.addEventListener("touchmove", (e) => {
+    if (!isPlaying || isDebateMode || !isDragging) return;
+    e.preventDefault();
+    const rect = canvas.getBoundingClientRect();
+    const touch = e.touches[0];
+    let tx = (touch.clientX - rect.left) * (canvas.width / rect.width);
+    let ty = (touch.clientY - rect.top) * (canvas.height / rect.height);
+    if (isReverse) { player.x = canvas.width - tx; player.y = canvas.height - ty; } 
+    else { player.x = tx; player.y = ty; }
+}, { passive: false });
+
 // ----------------------------------------
-// 4. メインループ (全ギミック・全パターン網羅)
+// 4. メインループ
 // ----------------------------------------
 
 function gameLoop() {
@@ -404,10 +433,6 @@ function gameLoop() {
     animationId = requestAnimationFrame(gameLoop);
 }
 
-// ----------------------------------------
-// 5. UI更新・終了処理
-// ----------------------------------------
-
 function updateUI() {
     const h = document.getElementById("hp-bar"), s = document.getElementById("score-display"), b = document.getElementById("skill-bar"), bt = document.getElementById("skill-btn");
     if(h) h.style.width = `${Math.max(0, hp)}%`;
@@ -422,44 +447,15 @@ function updateDialogue() {
     const ds = currentStage.dialogues[ph];
     if (ds) { const d = ds[Math.floor(Math.random()*ds.length)]; document.getElementById("speaker-name").innerText = d.speaker; document.getElementById("dialogue-text").innerText = d.text.replace(/{player}/g, playerName); }
 }
-setInterval(updateDialogue, 4000);
+setInterval(updateDialogue, 4200);
 
 function endGame(isClear) {
-    stopGame(); 
-    showScreen("result-screen");
-
-    // セリフリストの決定
+    stopGame(); showScreen("result-screen");
     let ds = isClear ? currentStage.dialogues.win : currentStage.dialogues.lose;
-    if (isEndless && score > 1000) ds = currentStage.dialogues.win; // エンドレスで頑張った場合
-
-    // ランダムに1つセリフを選択
+    if (isEndless && score > 800) ds = currentStage.dialogues.win;
     const d = ds[Math.floor(Math.random() * ds.length)];
-    
-    // タイトルと最終スコアの表示
-    document.getElementById("result-title").innerHTML = isHardMode ? "死闘の果てに..." : (isEndless ? "限界突破！" : (isClear ? "昇華成功！" : "崩壊..."));
+    document.getElementById("result-title").innerHTML = isHardMode ? "死闘の果てに..." : (isEndless ? "限界到達！" : (isClear ? "昇華成功！" : "崩壊..."));
     document.getElementById("final-score").innerText = score;
-
-    // 🌟 【修正ポイント】ここで {player} を実際の playerName に置き換える！
     document.getElementById("result-speaker").innerText = d.speaker;
     document.getElementById("result-text").innerText = d.text.replace(/{player}/g, playerName);
-}
-// --- 🌟 音の管理フラグ ---
-let isMuted = true; // 最初はミュート（オフ）
-
-// 音量切り替えボタン
-document.getElementById("sound-toggle-btn").onclick = () => {
-    isMuted = !isMuted;
-    const icon = document.getElementById("sound-icon");
-    icon.className = isMuted ? "fa-solid fa-volume-xmark" : "fa-solid fa-volume-high";
-};
-
-// 🌟 音を鳴らす共通関数（みつきが用意したファイル名を入れる）
-function playSE(type) {
-    if (isMuted) return;
-    const se = new Audio();
-    if (type === "shoot") se.src = ASSET_PATH + "shoot.mp3";
-    if (type === "hit") se.src = ASSET_PATH + "hit.mp3";
-    if (type === "skill") se.src = ASSET_PATH + "skill.mp3";
-    if (type === "dead") se.src = ASSET_PATH + "dead.mp3";
-    se.volume = 0.3; se.play().catch(()=>{});
 }
