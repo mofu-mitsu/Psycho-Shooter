@@ -124,7 +124,7 @@ const GAME_DATA = {
             support: { 
                 name: "ご褒美", fullName: "栄城 縫（えいしろ ぬい）", gender: "男性", class: "H3-1",
                 profile: "豚モチーフ。あだ名はご褒美。風呂上がりの出汁は豚骨仕立て。罵倒されると喜ぶドM。ツインテールのワシャワシャに命をかけるオタク。",
-                img: "gohoubi.png", words: ["ありがトン♡", "ご褒美だゾ", "豚骨仕立て", "ブヒィ！", "ワシャワシャしたいゾ", "たまらんゾ"], color: "#ff99cc", skillType: "heal" 
+                img: "nui.png", words: ["ありがトン♡", "ご褒美だゾ", "豚骨仕立て", "ブヒィ！", "ワシャワシャしたいゾ", "たまらんゾ"], color: "#ff99cc", skillType: "heal" 
             },
             playerWords: ["臭い！", "離れろ！", "換気して", "シャワー浴びて", "ポカリいらん！", "近寄るな！", "油っこい！"],
             enemyColor: "#ff9900",
@@ -278,7 +278,7 @@ const GAME_DATA = {
             support: { 
                 name: "ご褒美", fullName: "栄城 縫（えいしろ ぬい）", gender: "男性", class: "H3-1",
                 profile: "あだ名はご褒美。罵倒されると喜ぶドM豚。うらら様のキレ芸は彼にとってのご褒美。",
-                img: "gohoubi.png", words: ["ありがトン♡", "もっとキレて！", "たまらんゾ", "ブヒィ！"], color: "#ff99cc", skillType: "shield" 
+                img: "nui.png", words: ["ありがトン♡", "もっとキレて！", "たまらんゾ", "ブヒィ！"], color: "#ff99cc", skillType: "shield" 
             },
             playerWords: ["落ち着いて", "花を大事に", "怒鳴らないで", "ご褒美を無視して", "綺麗に咲いてるよ", "ガーデニングしよう"],
             enemyColor: "#ff0000",
