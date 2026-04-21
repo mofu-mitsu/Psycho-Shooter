@@ -68,16 +68,17 @@ if (soundBtn) {
     });
 }
 // 🌟 効果音（SE）再生関数
+const sounds = {
+    shoot: new Audio(ASSET_PATH + "shoot.mp3"),
+    hit: new Audio(ASSET_PATH + "hit.mp3"),
+    skill: new Audio(ASSET_PATH + "skill.mp3"),
+    dead: new Audio(ASSET_PATH + "dead.mp3")
+};
+
 function playSE(type) {
-    if (isMuted) return; // ミュートならここで処理ストップ
-    const se = new Audio();
-    // ※assetsフォルダに該当ファイルを入れる想定
-    if (type === "shoot") se.src = ASSET_PATH + "shoot.mp3";
-    if (type === "hit") se.src = ASSET_PATH + "hit.mp3";
-    if (type === "skill") se.src = ASSET_PATH + "skill.mp3";
-    if (type === "dead") se.src = ASSET_PATH + "dead.mp3";
-    se.volume = 0.3; 
-    se.play().catch(() => {}); // 再生エラーを無視
+    if (isMuted || !sounds[type]) return;
+    sounds[type].currentTime = 0; // 再生位置を最初に戻す
+    sounds[type].play().catch(() => {});
 }
 
 // ----------------------------------------
@@ -166,11 +167,38 @@ function startGame(stage) {
 // ----------------------------------------
 
 function firePunch() {
+    // パンチのエフェクトを生成
     punchEffects.push({ x: supportNPC.x, y: canvas.height + 50, targetY: canvas.height/2, life: 80 });
-    enemies.forEach(e => { if(Math.abs(e.x - supportNPC.x) < 200) { e.hp = 0; score += 5; } });
+    
+    // 🌟 【修正】描画を待たずに、今画面にいる敵を即座に「消去」する！
+    let killCount = 0;
+    enemies = enemies.filter(e => {
+        if (Math.abs(e.x - supportNPC.x) < 220) { // パンチの横幅
+            killCount++;
+            return false; // 生き残りリストに入れない＝消滅
+        }
+        return true;
+    });
+    score += killCount * 10;
+    playSE("skill");
+    updateUI();
 }
+
 function fireLaser() {
     lasers.push({ x: supportNPC.x, life: 40 });
+    
+    // 🌟 【修正】レーザーのライン上の敵を即座に消去
+    let killCount = 0;
+    enemies = enemies.filter(e => {
+        if (Math.abs(e.x - supportNPC.x) < 80) { // レーザーの横幅
+            killCount++;
+            return false;
+        }
+        return true;
+    });
+    score += killCount * 5;
+    playSE("skill");
+    updateUI();
 }
 function fireCatBomb() {
     for (let i = 0; i < 40; i++) catBombs.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, life: 60 });
@@ -305,7 +333,36 @@ function gameLoop() {
     if (currentStage.id === "stage19") { // 金
         moneyDecoys.forEach((m, i) => { ctx.font = "30px sans-serif"; ctx.fillText("💴", m.x, m.y); m.y += m.speed; if (m.y > canvas.height + 50) moneyDecoys.splice(i, 1); });
     }
-    if (currentStage.id === "stage4" && score > 400 && frameCount % 120 === 0) decoys.push({ x: player.x - 50, y: player.y - 50, text: "檻", life: 100, color: "red", isCage: true });
+// 文字ギミック描画
+    decoys.forEach((d, i) => { 
+        if (d.isCage) {
+            // 🌟 ゆいの愛の檻：描画
+            ctx.strokeStyle = "rgba(255, 0, 0, 0.8)";
+            ctx.lineWidth = 4;
+            ctx.strokeRect(d.x, d.y, 120, 120);
+            
+            ctx.fillStyle = "red";
+            ctx.font = "bold 14px sans-serif";
+            ctx.fillText("愛の檻", d.x + 60, d.y + 20); // 🌟 文字を表示！
+
+            // 檻の中に入っている時のペナルティ
+            if (player.x > d.x && player.x < d.x + 120 && player.y > d.y && player.y < d.y + 120) {
+                isReverse = true; // 操作反転！
+                hp -= 0.1; // 🌟 持続ダメージ！
+                ctx.fillStyle = "rgba(255, 0, 0, 0.2)";
+                ctx.fillRect(d.x, d.y, 120, 120); // 赤く光らせる
+            }
+        } else {
+            ctx.fillStyle = d.color || `rgba(200,200,255,${d.life/100})`;
+            ctx.font = "bold 28px sans-serif";
+            ctx.fillText(d.text, d.x, d.y);
+        }
+        d.life--; 
+        if (d.life <= 0) {
+            decoys.splice(i, 1);
+            if (d.isCage) isReverse = false; // 檻が消えたら反転も治る
+        }
+    });
     if (currentStage.id === "stage10" && frameCount % 30 === 0) decoys.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, text: "💎", life: 60, color: "rgba(200, 255, 255, 0.8)" });
     if (currentStage.id === "stage14" && score > 300 && frameCount % 40 === 0) decoys.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, text: "❓", life: 55, color: "rgba(255, 200, 0, 0.7)" });
 
@@ -357,28 +414,87 @@ function gameLoop() {
     bullets.forEach((b, bi) => { b.y += b.speed; ctx.fillStyle=b.color; ctx.font="16px bold sans-serif"; ctx.fillText(b.text, b.x, b.y); });
     bullets = bullets.filter(b => b.y > -50);
 
-    for (let i = enemies.length - 1; i >= 0; i--) {
+for (let i = enemies.length - 1; i >= 0; i--) {
         let e = enemies[i]; 
         if (!isFreeze) {
-            if (currentStage.pattern === "chase" && !e.isBonus) { e.dx += (player.x - e.x) * 0.001; e.dy += (player.y - e.y) * 0.001; }
+            if (currentStage.pattern === "chase" && !e.isBonus) {
+                // 🌟 【執着型ホーミング】 逃げてもUターンして追ってくる！
+                let ax = player.x - e.x;
+                let ay = player.y - e.y;
+                let dist = Math.sqrt(ax * ax + ay * ay);
+                
+                if (dist > 0) {
+                    // 加速度を上げて粘着質に（0.15）
+                    e.dx += (ax / dist) * 0.15; 
+                    e.dy += (ay / dist) * 0.15;
+                }
+                // 慣性（ブレーキ）をかけて旋回性能をアップ
+                e.dx *= 0.96; 
+                e.dy *= 0.96;
+            }
             e.x += e.dx; e.y += e.dy; 
         }
-        ctx.fillStyle = e.color; ctx.font="bold 20px sans-serif"; ctx.fillText(e.text, e.x, e.y);
         
-        if (e.isBonus) {
-            if (Math.abs(player.x - e.x) < 30 && Math.abs(player.y - e.y) < 30) { if (e.text === "💖") hp = Math.min(100, hp + 6); else score += 30; updateUI(); enemies.splice(i, 1); playSE("skill"); }
-        } else {
-            bullets.forEach((b, bi) => { if(Math.abs(b.x-e.x)<50 && Math.abs(b.y-e.y)<20) { enemies.splice(i, 1); bullets.splice(bi, 1); score += 10; updateUI(); playSE("hit"); } });
-            
-            // 🌟 理性ライン防衛判定
-            if (isLineDefense && e.y > canvas.height - 10) { hp -= 5; enemies.splice(i, 1); updateUI(); playSE("dead"); if(hp <= 0) return endGame(false); }
+        // 敵の言葉を描画
+        ctx.fillStyle = e.color;
+        ctx.font = "bold 20px sans-serif";
+        ctx.fillText(e.text, e.x, e.y);
 
-            if (e && Math.abs(player.x-e.x)<25 && Math.abs(player.y-e.y)<25) { 
-                if (!isShield) { hp -= isHardMode?25:10; updateUI(); enemies.splice(i,1); playSE("dead"); if(hp<=0) return endGame(false); }
-                else enemies.splice(i, 1);
+        // --- 🌟 ボーナス回収判定 ---
+        if (e.isBonus) {
+            if (Math.abs(player.x - e.x) < 35 && Math.abs(player.y - e.y) < 35) {
+                if (e.text === "💖") hp = Math.min(100, hp + 10); else score += 40;
+                updateUI(); enemies.splice(i, 1); playSE("skill"); continue;
+            }
+        } else {
+            // --- 🌟 当たり判定（弾vs敵） ---
+            let wasHit = false;
+            for (let j = bullets.length - 1; j >= 0; j--) {
+                let b = bullets[j];
+                if (Math.abs(b.x - e.x) < 60 && Math.abs(b.y - e.y) < 30) {
+                    wasHit = true;
+                    bullets.splice(j, 1); // 弾を消す
+                    break;
+                }
+            }
+
+            if (wasHit) {
+                enemies.splice(i, 1); // 敵を消す
+                score += 10;
+                updateUI();
+                playSE("hit");
+                continue; 
+            }
+
+            // --- 🌟 理性ライン防衛判定 (これがないとミニゲームが機能しない！) ---
+            if (isLineDefense && e.y > canvas.height - 10) {
+                hp -= 5; 
+                enemies.splice(i, 1); 
+                updateUI(); 
+                playSE("dead"); 
+                if (hp <= 0) return endGame(false);
+                continue;
+            }
+
+            // --- 🌟 プレイヤーとの衝突判定 ---
+            if (Math.abs(player.x - e.x) < 25 && Math.abs(player.y - e.y) < 25) { 
+                if (!isShield) {
+                    hp -= isHardMode ? 25 : 12;
+                    enemies.splice(i, 1);
+                    updateUI();
+                    playSE("dead");
+                    if (hp <= 0) return endGame(false);
+                } else {
+                    enemies.splice(i, 1); // シールド中は消すだけ
+                }
+                continue;
             }
         }
-        if (e && (e.y > canvas.height + 150 || e.x < -150 || e.x > canvas.width + 150)) enemies.splice(i, 1);
+
+        // --- 🌟 画面外消去処理 (これがないと重くなる！) ---
+        if (e && (e.y > canvas.height + 150 || e.x < -150 || e.x > canvas.width + 150)) {
+            enemies.splice(i, 1);
+        }
     }
 
     if (isDarkness) {
