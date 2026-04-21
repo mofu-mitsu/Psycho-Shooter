@@ -85,22 +85,27 @@
             <div id="top-bar">
                 <div class="gauge-container">
                     <i class="fa-solid fa-heart" style="color:#ff4444;"></i>
-                    <div class="gauge-bg"><div id="hp-bar" class="gauge-fill hp-fill"></div></div>
+                    <div id="hp-bar-bg" class="gauge-bg"><div id="hp-bar" class="gauge-fill hp-fill"></div></div>
                 </div>
                 <div class="score-box">
                     <i class="fa-solid fa-star" style="color:#ffff44;"></i> 
                     <span id="score-display">0</span><span id="score-max">/1000</span>
                 </div>
-                <button id="quit-btn"><i class="fa-solid fa-door-open"></i> 退出</button>
+                
+                <!-- 🌟 ここ！ 退出ボタンとセットで置く -->
+                <div id="ui-controls">
+                    <button id="sound-toggle-btn"><i id="sound-icon" class="fa-solid fa-volume-xmark"></i></button>
+                    <button id="quit-btn"><i class="fa-solid fa-door-open"></i> 退出</button>
+                </div>
             </div>
-            <!-- top-bar の中、quit-btnの隣 -->
-            <div id="sound-controls">
-                <button id="sound-toggle-btn"><i id="sound-icon" class="fa-solid fa-volume-xmark"></i></button>
-            </div>
+
+            <!-- スキルボタン -->
             <div id="skill-container">
                 <button id="skill-btn" disabled><i class="fa-solid fa-bolt"></i> スキル</button>
                 <div class="gauge-bg skill-bg"><div id="skill-bar" class="gauge-fill skill-fill"></div></div>
             </div>
+
+            <!-- セリフ枠 -->
             <div id="dialogue-area">
                 <div class="chara-box"><img id="main-chara-img" src=""><div id="main-name" class="chara-name"></div></div>
                 <div id="dialogue-balloon" class="balloon"><span id="speaker-name"></span>「<span id="dialogue-text"></span>」</div>
